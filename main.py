@@ -1,6 +1,9 @@
 """Twitter bot that posts news-tweets from SVT Nyheter, translated into Rövarspråket."""
 
+import os
 import tweepy
+
+print(os.getenv("TEST"))
 
 ### Authentication:
 API_KEY = "key"
