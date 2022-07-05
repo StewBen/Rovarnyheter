@@ -1,2 +1,3 @@
 # SosVovTot-Nonyhohetoteror
-Bot tweeting news, translated to Rövarspråket, from SVT Nyheter.
+A Python Script hosted on Heroku for running the Twitter Bot @sosvovtot.
+Posts news-tweets from @svtnyheter, translated into Rövarspråket.
