@@ -7,11 +7,11 @@ import os     # To handle environment variables
 import tweepy # To handle Twitter actions
 
 ### Init keys being stored as config vars on Heroku:
-API_KEY = os.getenv("API_KEY")
-API_KEY_SECRET = os.getenv("API_KEY_SECRET")
-ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+API_KEY =             os.getenv("API_KEY")
+API_KEY_SECRET =      os.getenv("API_KEY_SECRET")
+ACCESS_TOKEN =        os.getenv("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
-BEARER_TOKEN = os.getenv("BEARER_TOKEN")
+BEARER_TOKEN =        os.getenv("BEARER_TOKEN")
 
 ### Authenticate our client:
 client = tweepy.Client(consumer_key = API_KEY,
@@ -35,7 +35,7 @@ def encode(string):
     consonants_uppercase = "BCDFGHJKLMNPQRSTVWXZ"
     for char in consonants_lowercase:
         string = string.replace(char, char + "o" + char)
-    for char in consonants_uppercase: # Gets a bit ugly here because of Capitals (X -> Xox)
+    for char in consonants_uppercase: # Gets a bit ugly here because of how Capitals (X -> Xox)
         char_lowercase = consonants_lowercase[consonants_uppercase.index(char)]
         string = string.replace(char, char + "o" + char_lowercase)
     return string
@@ -57,7 +57,7 @@ for old_tweet in tweets_bot:
         if old_tweet.text.split("https")[0] == new_tweet.split("https")[0]:
             new_tweets.remove(new_tweet)
 
-### Finally, tweet the new, and encoded articles that remain in chronological order:
+### Finally, tweet the new, and encoded articles that remain, in chronological order:
 new_tweets.reverse()
 for tweet in new_tweets:
     client.create_tweet(text = tweet)
