@@ -1,4 +1,4 @@
-"""A Python Script hosted on Heroku for running the Twitter Bot @sosvovtot.
+"""A Python Script hosted on Heroku for running the Twitter Bot @rovarnyheter.
    Posts news-tweets from @svtnyheter, translated into Rövarspråket.
 
    Written by Viktor Stubbfält, 2022-07-05"""
@@ -6,27 +6,19 @@
 import os     # To handle environment variables
 import tweepy # To handle Twitter actions
 
-### Init keys being stored as config vars on Heroku:
-API_KEY =             os.getenv("API_KEY")
-API_KEY_SECRET =      os.getenv("API_KEY_SECRET")
-ACCESS_TOKEN =        os.getenv("ACCESS_TOKEN")
-ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
-BEARER_TOKEN =        os.getenv("BEARER_TOKEN")
-
-### Authenticate our client:
-client = tweepy.Client(consumer_key = API_KEY,
-                       consumer_secret = API_KEY_SECRET,
-                       access_token = ACCESS_TOKEN,
-                       access_token_secret = ACCESS_TOKEN_SECRET,
-                       bearer_token = BEARER_TOKEN)
+### Authenticate our client with keys being stored as config vars on Heroku:
+client = tweepy.Client(consumer_key = os.getenv("API_KEY"),
+                       consumer_secret = os.getenv("API_KEY_SECRET"),
+                       access_token = os.getenv("ACCESS_TOKEN"),
+                       access_token_secret = os.getenv("ACCESS_TOKEN_SECRET"),
+                       bearer_token = os.getenv("BEARER_TOKEN"))
 
 ### Get the 20 most recent Tweets from both SVT account and Bot account:
 ID_BOT = 1543388377571106816
-tweets_bot = client.get_users_tweets(id = ID_BOT, max_results = 20).data
+tweets_bot = client.get_users_tweets(id = ID_BOT,max_results = 20).data
 
 ID_SVT = 372142346
-tweets_svt = client.get_users_tweets(id = ID_SVT,
-                                     max_results = 20,
+tweets_svt = client.get_users_tweets(id = ID_SVT, max_results = 20,
                                      exclude = ["retweets", "replies"]).data
 
 def encode(string):
