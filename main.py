@@ -35,11 +35,12 @@ def encode(string):
 ### Encode and then store the recent SVT article-tweets as strings in a list:
 new_tweets = []
 for tweet in tweets_svt:
-    split = tweet.text.split("https") # All of their Tweets end with a URL to their website.
-    new_tweet = encode(split[0]) + "https" + split[1] # Don't encode the URL.
-    new_tweet = new_tweet.replace('\n', '') # Remove newlines, Twitter doesn't even display those...
-    if len(new_tweet) <= 280: # Check Twitter character limit
-        new_tweets.append(new_tweet)
+    if "https" in tweet.text: # Discard Tweets that don't link to an article
+        split = tweet.text.split("https") # All of their Tweets end with a URL to their website.
+        new_tweet = encode(split[0]) + "https" + split[1] # Don't encode the URL.
+        new_tweet = new_tweet.replace('\n', '') # Remove newlines, Twitter doesn't even display those...
+        if len(new_tweet) <= 280: # Check Twitter character limit
+            new_tweets.append(new_tweet)
 
 ### From that list, remove all tweets that have already been posted from the bot (i.e. duplicates):
 for old_tweet in tweets_bot:
