@@ -23,13 +23,11 @@ tweets_svt = client.get_users_tweets(id = ID_SVT, max_results = 20,
 
 def encode(string):
     """Encodes a string into Rövarspråket."""
-    consonants_lowercase = "bcdfghjklmnpqrstvwxz"
-    consonants_uppercase = "BCDFGHJKLMNPQRSTVWXZ"
-    for char in consonants_lowercase:
+    consonants = "bcdfghjklmnpqrstvwxz"
+    for char in consonants:
         string = string.replace(char, char + "o" + char)
-    for char in consonants_uppercase: # Gets a bit ugly here because of how Capitals (X -> Xox)
-        char_lowercase = consonants_lowercase[consonants_uppercase.index(char)]
-        string = string.replace(char, char + "o" + char_lowercase)
+    for char in consonants.upper(): # Special handling for Upper Case.
+        string = string.replace(char, char + "o" + char.lower())
     return string
 
 ### Encode and then store the recent SVT article-tweets as strings in a list:
